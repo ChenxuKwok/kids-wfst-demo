@@ -1,5 +1,6 @@
 import React from 'react';
 import InlineAudioPlayer from '../components/InlineAudioPlayer';
+import preprocessedData from '../assets/preprocessedData.json';
 
 // Example configuration showing how to add inline audio to tables
 export const audioTableConfig = {
@@ -45,7 +46,7 @@ export const audioTableConfig = {
         {
           key: 'error_stats',
           header: 'Error Statistics',
-          sortable: true,
+          sortable: false,
           render: (stats) => (
             <div className="flex flex-col space-y-1">
               <div className="text-xs text-gray-600">Substitutions: {stats.substitutions}</div>
@@ -61,13 +62,13 @@ export const audioTableConfig = {
           key: 'score', 
           header: 'Score',
           sortable: true,
-          render: (value) => `${value.toFixed(2)}s`
+          render: (value) => `${value.toFixed(2)}`
         },
         // Advice from LLM
         {
           key: 'llm_advice',
           header: 'LLM Advice',
-          sortable: true,
+          sortable: false,
           render: (value) => (
             <div className="max-w-xs">
               <p className="text-sm text-gray-700 line-clamp-2">{value}</p>
@@ -77,16 +78,10 @@ export const audioTableConfig = {
       ],
       data: [
         {
-          audio_file: "audio/kids_wfst_dysfluency_001.mp3",
-          sample_id: "001",
+          audio_file: "../assets/audio/sample_1.wav",
+          sample_id: "sample_1",
           speaker: "Child A",
-          dysfluency_type: "Repetition",
-          // read from file
-          // Read phoneme transcription from a text file
-          phn_transcription: require('fs').readFileSync(
-          require('path').resolve(__dirname, 'transcription/kids_wfst_dysfluency_001.phn.txt'),
-          'utf8'
-          ),
+          phn_transcription: preprocessedData["sample_1"]?.phn_transcription || "",
           error_stats: {
           substitutions: 91,
           deletions: 82,
@@ -95,13 +90,35 @@ export const audioTableConfig = {
           verified_per: 32.29
           },
           score: 0.88,
-          llm_advice: require('fs').readFileSync(
-          require('path').resolve(__dirname, 'llm_advice/kids_wfst_dysfluency_001.txt'),
-          'utf8'
-          ),
+          llm_advice: preprocessedData["sample_1"]?.llm_advice || "",
           },
-        ]}
+        ]
+    },
   ],
+  
+  additionalContent: `
+    <div class="bg-blue-50 p-6 rounded-lg">
+      <h4 class="text-lg font-semibold mb-3 text-blue-800">Audio Sample Guidelines</h4>
+      <div class="grid md:grid-cols-2 gap-4 text-sm text-blue-700">
+        <div>
+          <h5 class="font-medium mb-2">Supported Formats:</h5>
+          <ul class="list-disc list-inside space-y-1">
+            <li>MP3 (recommended)</li>
+            <li>WAV</li>
+            <li>OGG</li>
+          </ul>
+        </div>
+        <div>
+          <h5 class="font-medium mb-2">Best Practices:</h5>
+          <ul class="list-disc list-inside space-y-1">
+            <li>Keep files under 5MB</li>
+            <li>Use descriptive filenames</li>
+            <li>Optimize for web playback</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  `
 };
 
 // Alternative: Simple audio column configuration
@@ -136,7 +153,7 @@ export const advancedAudioColumn = {
           {row.waveform_data.map((height, i) => (
             <div
               key={i}
-              className="bg-blue-400 w-1 rounded-t"
+            className="bg-blue-400 w-1 rounded-t"
               style={{ height: `${height * 100}%` }}
             />
           ))}
@@ -145,4 +162,3 @@ export const advancedAudioColumn = {
     </div>
   )
 };
-
