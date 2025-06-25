@@ -64,13 +64,13 @@ const VideoSection = ({ section }) => {
             )}
 
             {/* Audio Samples Section */}
-            <div className="bg-white rounded-lg shadow-lg p-6">
-              <h3 className="text-xl font-semibold mb-6 flex items-center">
-                <Volume2 className="mr-2" size={24} />
-                Audio Samples
-              </h3>
-              
-              {section.samples && section.samples.length > 0 ? (
+            {section.samples && section.samples.length > 0 && (
+              <div className="bg-white rounded-lg shadow-lg p-6">
+                <h3 className="text-xl font-semibold mb-6 flex items-center">
+                  <Volume2 className="mr-2" size={24} />
+                  Audio Samples
+                </h3>
+
                 <div className="space-y-4">
                   {section.samples.map((sample, index) => (
                     <div key={index} className="border rounded-lg p-4 hover:bg-gray-50 transition-colors">
@@ -80,8 +80,8 @@ const VideoSection = ({ section }) => {
                           onClick={() => togglePlay(`${section.id}-${index}`)}
                           className="bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700 transition-colors"
                         >
-                          {isPlaying[`${section.id}-${index}`] ? 
-                            <Pause size={16} /> : 
+                          {isPlaying[`${section.id}-${index}`] ?
+                            <Pause size={16} /> :
                             <Play size={16} />
                           }
                         </button>
@@ -102,14 +102,8 @@ const VideoSection = ({ section }) => {
                     </div>
                   ))}
                 </div>
-              ) : (
-                <div className="text-center text-gray-400 py-8">
-                  <Volume2 size={48} className="mx-auto mb-2 opacity-50" />
-                  <p>No audio samples available</p>
-                  <p className="text-sm">Add samples to the config file</p>
-                </div>
-              )}
-            </div>
+              </div>
+            )}
           </div>
 
           {/* Additional content area for custom elements */}
