@@ -1,11 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Play, Pause, Volume2, VolumeX, Download } from 'lucide-react';
+import { Play, Pause, Volume2, VolumeX } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const InlineAudioPlayer = ({ 
   audioSrc, 
   title = "Audio Sample",
-  showDownload = true,
+  showDownload = false,
   showTitle = true,
   compact = false 
 }) => {
@@ -70,15 +70,6 @@ const InlineAudioPlayer = ({
     audio.currentTime = percent * duration;
   };
 
-  const handleDownload = () => {
-    const link = document.createElement('a');
-    link.href = audioSrc;
-    link.download = title.replace(/\s+/g, '_').toLowerCase() + '.mp3';
-    link.click();
-  };
-
-  const formatTime = (time) => {
-    if (isNaN(time)) return '0:00';
     const minutes = Math.floor(time / 60);
     const seconds = Math.floor(time % 60);
     return `${minutes}:${seconds.toString().padStart(2, '0')}`;
@@ -132,16 +123,6 @@ const InlineAudioPlayer = ({
           </div>
         </div>
 
-        {showDownload && (
-          <Button
-            size="sm"
-            variant="ghost"
-            onClick={handleDownload}
-            className="h-6 w-6 p-0 flex-shrink-0"
-          >
-            <Download size={12} />
-          </Button>
-        )}
       </div>
     );
   }
@@ -196,16 +177,6 @@ const InlineAudioPlayer = ({
           {isMuted ? <VolumeX size={16} /> : <Volume2 size={16} />}
         </Button>
 
-        {showDownload && (
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={handleDownload}
-            className="h-8 w-8 p-0"
-          >
-            <Download size={16} />
-          </Button>
-        )}
       </div>
     </div>
   );

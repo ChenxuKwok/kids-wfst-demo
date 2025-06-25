@@ -1,23 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import DataTable from './DataTable';
 
 const TableSection = ({ tableConfig }) => {
-  const [hiddenColumnsState, setHiddenColumnsState] = useState(() => {
-    const initialState = {};
-    tableConfig.tables.forEach((table, index) => {
-      if (table.toggleableColumns) {
-        initialState[index] = []; // Initialize all toggleable columns as visible
-      }
-    });
-    return initialState;
-  });
-
-  const handleColumnVisibilityChange = (tableIndex, newHiddenColumns) => {
-    setHiddenColumnsState(prev => ({
-      ...prev,
-      [tableIndex]: newHiddenColumns
-    }));
-  };
 
   return (
     <section className="py-16 bg-gray-50">
@@ -44,14 +28,8 @@ const TableSection = ({ tableConfig }) => {
                 data={table.data}
                 columns={table.columns}
                 searchable={table.searchable !== false}
-                downloadable={table.downloadable !== false}
                 pageSize={table.pageSize || 10}
-                // Pass toggleable columns and current hidden state
-                toggleableColumns={table.toggleableColumns || []}
-                hiddenColumns={hiddenColumnsState[index] || []}
-                onColumnVisibilityChange={(newHiddenColumns) => 
-                  handleColumnVisibilityChange(index, newHiddenColumns)
-                }
+                hiddenColumns={table.hiddenColumns || []}
               />
             ))}
           </div>
