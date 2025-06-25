@@ -102,7 +102,15 @@ const DataTable = ({
   };
 
   // Get toggleable columns (exclude the first column which should always be visible)
-  const toggleableColumns = columns.slice(1);
+  // Determine which columns can be toggled. If the caller didn't
+  // specify any, default to all except the first column so the
+  // primary column is always visible.
+  const toggleableColumnDefs = useMemo(() => {
+    if (toggleableColumns && toggleableColumns.length > 0) {
+      return columns.filter((col) => toggleableColumns.includes(col.key));
+    }
+    return columns.slice(1);
+  }, [columns, toggleableColumns]);
 
   return (
     <div className="bg-white rounded-lg shadow-lg p-6">
@@ -133,11 +141,11 @@ const DataTable = ({
       </div>
 
       {/* Column Visibility Controls */}
-      {toggleableColumns.length > 0 && (
+      {toggleableColumnDefs.length > 0 && (
         <div className="mb-4 p-4 bg-gray-50 rounded-lg">
           <h4 className="text-sm font-medium text-gray-700 mb-3">Show/Hide Columns:</h4>
           <div className="flex flex-wrap gap-2">
-            {toggleableColumns.map((column) => (
+            {toggleableColumnDefs.map((column) => (
               <Button
                 key={column.key}
                 variant={localHiddenColumns.includes(column.key) ? "outline" : "default"}
