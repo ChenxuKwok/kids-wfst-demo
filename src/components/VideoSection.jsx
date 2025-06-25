@@ -119,4 +119,3 @@ const VideoSection = ({ section }) => {
 };
 
 export default VideoSection;
-

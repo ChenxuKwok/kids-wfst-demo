@@ -1,6 +1,7 @@
 import React from 'react';
 import InlineAudioPlayer from '../components/InlineAudioPlayer';
 import { audioTableConfig } from './audio-table-config'; // Adjust path if you renamed the file
+import video from '../assets/videos/Sample Media Clip 11.mp4'
 
 // Website Configuration - Edit this file to customize your content
 export const siteConfig = {
@@ -21,7 +22,7 @@ export const siteConfig = {
       title: "kids-WFST Introduction",
       description: "This section provides an overview of the Kids-WFST framework, highlighting its key features and advantages over traditional methods.",
       videoUrl: "", // Add your video URL here
-      videoFile: "../assets/videos/Sample Media Clip 11.mp4", // Or add local video file path here
+      videoFile: video, // Or add local video file path here
       // samples: []
     },
   ],
