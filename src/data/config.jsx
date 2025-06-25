@@ -49,8 +49,8 @@ export const siteConfig = {
 
   // Styling options
   theme: {
-    primaryColor: "#3b82f6", // Blue
-    accentColor: "#10b981", // Green
+    primaryColor: "#f8985b", // orange color
+    accentColor: "#fde5d6", // Light background color
     backgroundColor: "#ffffff",
     textColor: "#1f2937"
   }
