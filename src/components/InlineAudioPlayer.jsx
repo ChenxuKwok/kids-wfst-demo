@@ -5,9 +5,8 @@ import { Button } from '@/components/ui/button';
 const InlineAudioPlayer = ({ 
   audioSrc, 
   title = "Audio Sample",
-  showDownload = false,
   showTitle = true,
-  compact = false 
+  compact = false
 }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
