@@ -9,28 +9,24 @@ import {
 } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { ChevronLeft, ChevronRight, Search, Download, Eye, EyeOff } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Search } from 'lucide-react';
 
 const DataTable = ({ 
   title = "Data Table", 
   data = [], 
   columns = [], 
   searchable = true,
-  downloadable = true,
   pageSize = 10,
-  toggleableColumns = [],
-  hiddenColumns = [],
-  onColumnVisibilityChange = () => {}
+  hiddenColumns = []
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });
-  const [localHiddenColumns, setLocalHiddenColumns] = useState(hiddenColumns);
 
   // Filter visible columns based on hidden columns
   const visibleColumns = useMemo(() => {
-    return columns.filter(column => !localHiddenColumns.includes(column.key));
-  }, [columns, localHiddenColumns]);
+    return columns.filter(column => !hiddenColumns.includes(column.key));
+  }, [columns, hiddenColumns]);
 
   // Filter data based on search term
   const filteredData = useMemo(() => {
@@ -71,47 +67,7 @@ const DataTable = ({
     }));
   };
 
-  const handleDownload = () => {
-    const csvContent = [
-      visibleColumns.map(col => col.header).join(','),
-      ...data.map(row => visibleColumns.map(col => {
-        const value = row[col.key];
-        // Handle complex objects by converting to string
-        if (typeof value === 'object' && value !== null) {
-          return JSON.stringify(value).replace(/,/g, ';');
-        }
-        return value || '';
-      }).join(','))
-    ].join('\\n');
-    
-    const blob = new Blob([csvContent], { type: 'text/csv' });
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `${title.replace(/\\s+/g, '_').toLowerCase()}.csv`;
-    a.click();
-    window.URL.revokeObjectURL(url);
-  };
-
-  const toggleColumnVisibility = (columnKey) => {
-    const newHiddenColumns = localHiddenColumns.includes(columnKey)
-      ? localHiddenColumns.filter(key => key !== columnKey)
-      : [...localHiddenColumns, columnKey];
-    
-    setLocalHiddenColumns(newHiddenColumns);
-    onColumnVisibilityChange(newHiddenColumns);
-  };
-
-  // Get toggleable columns (exclude the first column which should always be visible)
-  // Determine which columns can be toggled. If the caller didn't
-  // specify any, default to all except the first column so the
-  // primary column is always visible.
-  const toggleableColumnDefs = useMemo(() => {
-    if (toggleableColumns && toggleableColumns.length > 0) {
-      return columns.filter((col) => toggleableColumns.includes(col.key));
-    }
-    return columns.slice(1);
-  }, [columns, toggleableColumns]);
+  // Column visibility controls and CSV download have been removed.
 
   return (
     <div className="bg-white rounded-lg shadow-lg p-6">
@@ -132,39 +88,9 @@ const DataTable = ({
             </div>
           )}
           
-          {downloadable && (
-            <Button onClick={handleDownload} variant="outline" className="flex items-center gap-2">
-              <Download size={16} />
-              Download CSV
-            </Button>
-          )}
         </div>
       </div>
 
-      {/* Column Visibility Controls */}
-      {toggleableColumnDefs.length > 0 && (
-        <div className="mb-4 p-4 bg-gray-50 rounded-lg">
-          <h4 className="text-sm font-medium text-gray-700 mb-3">Show/Hide Columns:</h4>
-          <div className="flex flex-wrap gap-2">
-            {toggleableColumnDefs.map((column) => (
-              <Button
-                key={column.key}
-                variant={localHiddenColumns.includes(column.key) ? "outline" : "default"}
-                size="sm"
-                onClick={() => toggleColumnVisibility(column.key)}
-                className="flex items-center gap-2"
-              >
-                {localHiddenColumns.includes(column.key) ? (
-                  <EyeOff size={14} />
-                ) : (
-                  <Eye size={14} />
-                )}
-                {column.header}
-              </Button>
-            ))}
-          </div>
-        </div>
-      )}
 
       {/* Table */}
       <div className="overflow-x-auto">

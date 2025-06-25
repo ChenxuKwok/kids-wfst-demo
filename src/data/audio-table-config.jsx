@@ -2,6 +2,7 @@ import React from 'react';
 import InlineAudioPlayer from '../components/InlineAudioPlayer';
 import ExpandableText from '../components/ExpandableText';
 import preprocessedData from '../assets/preprocessedData.json';
+import sample1Audio from '../assets/audio/sample_1.wav';
 
 // Example configuration showing how to add inline audio to tables
 export const audioTableConfig = {
@@ -11,12 +12,7 @@ export const audioTableConfig = {
   tables: [
     {
       title: "Kids WFST Dysfluency Samples",
-      toggleableColumns: [ // NEW: Define columns that can be shown/hidden
-        'phn_transcription',
-        'llm_advice'
-      ],
       searchable: true,
-      downloadable: true,
       pageSize: 10,
       columns: [
         { 
@@ -75,7 +71,7 @@ export const audioTableConfig = {
       ],
       data: [
         {
-          audio_file: "../assets/audio/sample_1.wav",
+          audio_file: sample1Audio,
           sample_id: "sample_1",
           speaker: "Child A",
           phn_transcription: preprocessedData["sample_1"]?.phn_transcription || "",
