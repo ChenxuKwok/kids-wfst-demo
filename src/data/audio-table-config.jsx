@@ -36,7 +36,7 @@ export const audioTableConfig = {
         {
           key: 'phn_transcription',
           header: 'Phoneme Transcription',
-          sortable: true,
+          sortable: false,
           render: (value) => (
             <ExpandableText text={value} />
           )
@@ -92,30 +92,6 @@ export const audioTableConfig = {
         ]
     },
   ],
-  
-  additionalContent: `
-    <div class="bg-blue-50 p-6 rounded-lg">
-      <h4 class="text-lg font-semibold mb-3 text-blue-800">Audio Sample Guidelines</h4>
-      <div class="grid md:grid-cols-2 gap-4 text-sm text-blue-700">
-        <div>
-          <h5 class="font-medium mb-2">Supported Formats:</h5>
-          <ul class="list-disc list-inside space-y-1">
-            <li>MP3 (recommended)</li>
-            <li>WAV</li>
-            <li>OGG</li>
-          </ul>
-        </div>
-        <div>
-          <h5 class="font-medium mb-2">Best Practices:</h5>
-          <ul class="list-disc list-inside space-y-1">
-            <li>Keep files under 5MB</li>
-            <li>Use descriptive filenames</li>
-            <li>Optimize for web playback</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  `
 };
 
 // Alternative: Simple audio column configuration

@@ -5,13 +5,13 @@ import { audioTableConfig } from './audio-table-config'; // Adjust path if you r
 // Website Configuration - Edit this file to customize your content
 export const siteConfig = {
   // Main title and metadata
-  title: "Time-Accurate Speech Rich Transcription with Non-Fluencies",
-  subtitle: "SSDM 2.0 - Advanced Speech Processing Research",
+  title: "Kids-WFST",
+  subtitle: "A Phoneme Similarity-Augmented Framework for Child Speech Recognition inLanguage Disorder Assessment",
   
   // Abstract section
   abstract: {
     title: "Abstract",
-    content: `Speech is a hierarchical collection of text, prosody, emotions, dysfluencies, etc. Automatic transcription of speech that goes beyond text (words) is an underexplored problem. We focus on transcribing speech along with non-fluencies (dysfluencies). The current state-of-the-art pipeline suffers from complex architecture design, training complexity, and significant shortcomings in the local sequence aligner, and it does not explore in-context learning capacity. In this work, we propose SSDM 2.0, which tackles those shortcomings via four main contributions: (1) We propose a novel neural articulatory flow to derive highly scalable speech representations. (2) We developed a full-stack connectionist subsequence aligner that captures all types of dysfluencies.(3) We introduced a mispronunciation prompt pipeline and consistency learning module into LLM to leverage dysfluency in-context pronunciation learning abilities. (4) We curated Libri-Dys and open-sourced the current largest-scale co-dysfluency corpus, Libri-Co-Dys, for future research endeavors. Overall, SSDM 2.0 outperforms SSDM and all other dysfluency transcription models by a large margin.`
+    content: `Child speech recognition remains challenging, primarily due to higher fundamental frequency, greater articulatory variability, and data sparsity, preventing systems from achieving adult-level automatic speech recognition (ASR) accuracy. However, reliable child ASR is crucial for early disorder screening and longitudinal intervention monitoring. Most clinically relevant pronunciation errors occur at the sub-word level, which are often masked by word-level objectives such as Word Error Rate. Furthermore, even advanced frameworks including the previous SOTA, Weighted Finite-State Transducer (WFST), lack robustness for subtle phoneme variations. To address this, we propose Kids-WFST. It leverages a Wav2Vec2.0 based phoneme recognition model and a novel phoneme similarity-based substitution structure. When trained on a child speech corpus (MyST), Kids-WFST achieves superior child phoneme recognition against established baselines and demonstrates strong value in language assessment and dysfluency analysis, proving accurate sub-word ASR is vital for automated clinical tools.`
   },
 
   // Research sections with video support
