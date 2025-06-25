@@ -11,6 +11,8 @@ const VideoSection = ({ section }) => {
     }));
   };
 
+  const hasSamples = section.samples && section.samples.length > 0;
+
   return (
     <section className="py-16">
       <div className="container mx-auto px-4">
@@ -25,7 +27,7 @@ const VideoSection = ({ section }) => {
             </p>
           )}
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className={`grid gap-8 ${hasSamples ? 'md:grid-cols-2' : ''}`}> 
             {/* Main Video Section */}
             {(section.videoUrl || section.videoFile) && (
               <div className="bg-white rounded-lg shadow-lg overflow-hidden">
