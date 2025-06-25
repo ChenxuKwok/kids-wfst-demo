@@ -17,35 +17,13 @@ export const siteConfig = {
   // Research sections with video support
   sections: [
     {
-      id: "nfvppa",
-      title: "nfvPPA Speech",
-      description: "People with nfvPPA gradually have more trouble expressing themselves, even though they still understand the meaning of words. They might begin speaking in shorter phrases or pausing mid-sentence or mid-word. They may have increasing difficulty with pronouncing or mixing up sounds in familiar words.",
+      id: "Video Introduction",
+      title: "kids-WFST Introduction",
+      description: "This section provides an overview of the Kids-WFST framework, highlighting its key features and advantages over traditional methods.",
       videoUrl: "", // Add your video URL here
-      videoFile: "", // Or add local video file path here
-      samples: []
+      videoFile: "../assets/videos/Sample Media Clip 11.mp4", // Or add local video file path here
+      // samples: []
     },
-    {
-      id: "artificial1",
-      title: "Artificial Simulated Speech 1",
-      description: "Samples from Libri-Dys test set.",
-      videoUrl: "", // Add your video URL here
-      videoFile: "", // Or add local video file path here
-      samples: [
-        // Add audio/video samples here
-        // { name: "Sample 1", file: "path/to/sample1.mp3", description: "Description" }
-      ]
-    },
-    {
-      id: "artificial2", 
-      title: "Artificial Simulated Speech 2",
-      description: "Samples from Libri-Dys-Co test set.",
-      videoUrl: "", // Add your video URL here
-      videoFile: "", // Or add local video file path here
-      samples: [
-        // Add audio/video samples here
-        // { name: "Sample 2", file: "path/to/sample2.mp3", description: "Description" }
-      ]
-    }
   ],
 
   tableConfig: audioTableConfig,
