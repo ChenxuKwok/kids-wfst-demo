@@ -1,5 +1,6 @@
 import React from 'react';
 import InlineAudioPlayer from '../components/InlineAudioPlayer';
+import ExpandableText from '../components/ExpandableText';
 import preprocessedData from '../assets/preprocessedData.json';
 
 // Example configuration showing how to add inline audio to tables
@@ -37,9 +38,7 @@ export const audioTableConfig = {
           header: 'Phoneme Transcription',
           sortable: true,
           render: (value) => (
-            <div className="max-w-xs">
-              <p className="text-sm text-gray-700 line-clamp-2">{value}</p>
-            </div>
+            <ExpandableText text={value} />
           )
         },
         // Detailed Error Statistics
@@ -70,9 +69,7 @@ export const audioTableConfig = {
           header: 'LLM Advice',
           sortable: false,
           render: (value) => (
-            <div className="max-w-xs">
-              <p className="text-sm text-gray-700 line-clamp-2">{value}</p>
-            </div>
+            <ExpandableText text={value} />
           )
         }
       ],

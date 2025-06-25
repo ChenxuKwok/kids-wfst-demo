@@ -18,6 +18,7 @@ const DataTable = ({
   searchable = true,
   downloadable = true,
   pageSize = 10,
+  toggleableColumns = [],
   hiddenColumns = [],
   onColumnVisibilityChange = () => {}
 }) => {
