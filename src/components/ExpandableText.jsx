@@ -20,6 +20,7 @@ const ExpandableText = ({ text, lines = 2 }) => {
   const [scrollMax, setScrollMax] = useState(0);
   const textRef = useRef(null);
   const scrollRef = useRef(null);
+  const html = useMemo(() => (text ? marked.parse(text) : ''), [text]);
   useEffect(() => {
     if (!text) return;
     const el = textRef.current;
@@ -48,8 +49,7 @@ const ExpandableText = ({ text, lines = 2 }) => {
   const toggle = () => setExpanded((prev) => !prev);
   const clamped = expanded ? '' : `line-clamp-${lines}`;
 
-  const html = useMemo(() => (text ? marked.parse(text) : ''), [text]);
-  if (!text) return null;
+  // const html = useMemo(() => (text ? marked.parse(text) : ''), [text]);
 
   return (
     <div className="space-y-1 max-w-xs">
