@@ -31,6 +31,7 @@ const ExpandableText = ({ text, lines = 2 }) => {
   const clamped = expanded ? '' : `line-clamp-${lines}`;
 
   const html = useMemo(() => (text ? marked.parse(text) : ''), [text]);
+  if (!text) return null;
 
   return (
     <div className="space-y-1 max-w-xs">
