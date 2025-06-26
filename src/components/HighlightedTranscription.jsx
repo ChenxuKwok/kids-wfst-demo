@@ -55,7 +55,8 @@ const HighlightedTranscription = ({ text }) => {
           className={cn(
             tok.type && colorMap[tok.type],
             tok.type && 'px-1 rounded',
-            highlight === tok.type && 'ring-2 ring-offset-2'
+            // highlight === tok.type && 'ring-2 ring-offset-2'
+            highlight && highlight === tok.type && 'ring-2 ring-offset-2'
           )}
         >
           {tok.text}
