@@ -78,25 +78,28 @@ const ExpandableText = ({ text, lines = 2 }) => {
               <DialogHeader>
                 <DialogTitle>Advice</DialogTitle>
               </DialogHeader>
-              <ScrollArea ref={scrollRef} className="max-h-80">
-                <div
-                  className="text-sm text-gray-700 whitespace-pre-wrap"
-                  dangerouslySetInnerHTML={{ __html: html }}
+              <div className="flex items-start gap-2">
+                <ScrollArea ref={scrollRef} className="max-h-80 flex-1">
+                  <div
+                    className="text-sm text-gray-700 whitespace-pre-wrap"
+                    dangerouslySetInnerHTML={{ __html: html }}
+                  />
+                </ScrollArea>
+                <Slider
+                  orientation="vertical"
+                  className="h-80"
+                  min={0}
+                  max={scrollMax}
+                  value={[scrollPos]}
+                  onValueChange={(val) => {
+                    const container = scrollRef.current?.querySelector('[data-slot="scroll-area-viewport"]');
+                    if (container) {
+                      container.scrollTop = val[0];
+                    }
+                    setScrollPos(val[0]);
+                  }}
                 />
-              </ScrollArea>
-              <Slider
-                className="mt-2"
-                min={0}
-                max={scrollMax}
-                value={[scrollPos]}
-                onValueChange={(val) => {
-                  const container = scrollRef.current?.querySelector('[data-slot="scroll-area-viewport"]');
-                  if (container) {
-                    container.scrollTop = val[0];
-                  }
-                  setScrollPos(val[0]);
-                }}
-              />
+              </div>
             </DialogContent>
           </Dialog>
         </div>
