@@ -112,12 +112,12 @@
 
 @layer base {
   * {
-    @apply border-border;
+    @apply outline-none;
   }
   *:focus-visible {
-    @apply outline-ring/50;
+    @apply outline-none;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply outline-none;
   }
 }

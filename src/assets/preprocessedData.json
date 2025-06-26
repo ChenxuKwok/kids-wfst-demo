@@ -1,14 +1,14 @@
 {
   "sample_1": {
-    "phn_transcription": "'DH', 'EY', 'K', 'AO', 'L', 'M', 'IY', 'DH', 'EY', 'G', 'R', 'EY', ‘T’, 'W', 'AY', 'Z', 'B', 'IH', 'K', 'AO', 'Z', 'AH', 'V', 'M', 'AY', 'S', 'AY', 'Z",
+    "phn_transcription": "'DH', 'EY', 'K', 'AO', 'L', 'M', 'IY', <INS>, 'DH', 'EY', <\\INS>, 'G', 'R', 'EY', <DEL>, ‘T’, <\\DEL>, 'W', 'AY', <SUB>, 'Z', <\\SUB>, 'B', 'IH', 'K', 'AO', 'Z', 'AH', 'V', 'M', 'AY', 'S', 'AY', 'Z'",
     "llm_advice": "balabala"
   },
   "sample_2": {
-    "phn_transcription": "'DH', 'AH', 'S', 'T', 'EY', 'T', 'AE', 'N', 'AH', 'M', 'AH', 'L', 'AH', ‘V’, 'K', 'AE', 'L', 'AH', 'F', 'AO', ‘R’, 'N', 'AE', ‘AH’, 'AY', 'AE', 'M', 'K', 'AO', ‘L’, 'D', 'G', ‘R’, 'IY', 'S', 'L', 'IY', 'F', 'AO', 'R', 'DH', 'AH', 'S', 'IH', 'L', 'V', 'ER', 'T', 'IH', 'P', 'S', 'AH', 'V', 'M', 'AY', 'F', 'ER'",
+    "phn_transcription": "'DH', 'AH', 'S', 'T', 'EY', 'T', 'AE', 'N', 'AH', 'M', 'AH', 'L', 'AH', <DEL>, ‘V’, <\\DEL>, 'K', 'AE', 'L', 'AH', 'F', 'AO', <DEL>, ‘R’, <\\DEL>, 'N', <SUB>, 'AE', <\\SUB>, ‘AH’, 'AY', 'AE', 'M', 'K', 'AO', <DEL>, ‘L’, <\\DEL>, 'D', 'G', <DEL>, ‘R’, <\\DEL>, <SUB>, 'IY', 'S', <\\SUB>, 'L', 'IY', 'F', 'AO', 'R', 'DH', 'AH', 'S', 'IH', 'L', 'V', 'ER', 'T', 'IH', 'P', 'S', 'AH', 'V', 'M', 'AY', 'F', 'ER'",
     "llm_advice": ""
   },
   "sample_3": {
-    "phn_transcription": "'AY', 'AH', 'M', 'AH', 'B', 'AH', 'N', 'AE', 'N', 'AH', 'K', 'IH', 'L', 'AH', 'IH', 'R', 'IY', 'V', 'IH', 'N', 'DH', 'AH', 'W', 'UH', 'AY', 'D', 'W', 'UH', 'D', 'F', 'UH', 'L', 'IH', 'S', 'T'",
+    "phn_transcription": "<DEL>, 'AY', <\\DEL>, <SUB>, 'AH', <\\SUB>, 'M', 'AH', 'B', 'AH', 'N', 'AE', 'N', 'AH', <SUB>, 'K', <\\SUB>, <INS>, 'IH', <\\INS>, 'L', 'AH', <SUB>, 'IH', 'R', <\\SUB>, <DEL>, 'IY', 'V', <\\DEL>, 'IH', 'N', 'DH', 'AH', <SUB>, 'W', 'UH', <\\SUB>, <INS>, 'AY', <\\INS>, 'D', 'W', 'UH', 'D', 'F', <SUB>, 'UH', 'L', 'IH', <\\SUB>, <DEL>, 'S', 'T', <\\DEL>",
     "llm_advice": ""
   }
 }
