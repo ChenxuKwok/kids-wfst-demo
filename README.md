@@ -92,11 +92,15 @@ export const audioTableConfig = {
         },
         // ...
       ],
-      data: [ { audio_file: "../assets/audio/sample_1.wav", ... } ]
+  data: [ { audio_file: "../assets/audio/sample_1.wav", ... } ]
     }
   ]
 };
 ```
+
+The `llm_advice` field now supports **Markdown** formatting. Advice text files
+can include lists, links, and other Markdown elements which will be rendered in
+the table.
 
 ---
 

@@ -1,6 +1,7 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { marked } from 'marked';
 
 const ExpandableText = ({ text, lines = 2 }) => {
   const [expanded, setExpanded] = useState(false);
@@ -20,14 +21,15 @@ const ExpandableText = ({ text, lines = 2 }) => {
   const toggle = () => setExpanded((prev) => !prev);
   const clamped = expanded ? '' : `line-clamp-${lines}`;
 
+  const html = useMemo(() => (text ? marked.parse(text) : ''), [text]);
+
   return (
     <div className="space-y-1 max-w-xs">
-      <p
+      <div
         ref={textRef}
         className={cn('text-sm text-gray-700 whitespace-pre-wrap', clamped)}
-      >
-        {text}
-      </p>
+        dangerouslySetInnerHTML={{ __html: html }}
+      />
       {clampable && (
         <Button
           variant="link"
