@@ -1,4 +1,18 @@
 import React, { useState, useMemo } from 'react';
+
+export const RowHighlightContext = React.createContext({
+  highlight: null,
+  setHighlight: () => {}
+});
+
+const RowHighlightProvider = ({ children }) => {
+  const [highlight, setHighlight] = useState(null);
+  return (
+    <RowHighlightContext.Provider value={{ highlight, setHighlight }}>
+      {children}
+    </RowHighlightContext.Provider>
+  );
+};
 import {
   Table,
   TableBody,
@@ -118,13 +132,15 @@ const DataTable = ({
           <TableBody>
             {paginatedData.length > 0 ? (
               paginatedData.map((row, index) => (
-                <TableRow key={index} className="hover:bg-gray-50">
-                  {visibleColumns.map((column) => (
-                    <TableCell key={column.key} className="py-3">
-                      {column.render ? column.render(row[column.key], row) : row[column.key]}
-                    </TableCell>
-                  ))}
-                </TableRow>
+                <RowHighlightProvider key={index}>
+                  <TableRow className="hover:bg-gray-50">
+                    {visibleColumns.map((column) => (
+                      <TableCell key={column.key} className="py-3">
+                        {column.render ? column.render(row[column.key], row) : row[column.key]}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                </RowHighlightProvider>
               ))
             ) : (
               <TableRow>

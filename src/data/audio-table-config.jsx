@@ -1,6 +1,9 @@
 import React from 'react';
 import InlineAudioPlayer from '../components/InlineAudioPlayer';
 import ExpandableText from '../components/ExpandableText';
+import HighlightedTranscription from '../components/HighlightedTranscription';
+import ErrorStatsBadges from '../components/ErrorStatsBadges';
+import TranscriptionCell from '../components/TranscriptionCell';
 import preprocessedData from '../assets/preprocessedData.json';
 import sample1Audio from '../assets/audio/sample_1.wav';
 import sample2Audio from '../assets/audio/sample_2.wav';
@@ -37,7 +40,7 @@ export const audioTableConfig = {
           header: 'Phoneme Transcription',
           sortable: false,
           render: (value) => (
-            <ExpandableText text={value} />
+            <TranscriptionCell text={value} />
           )
         },
         // Detailed Error Statistics
@@ -46,11 +49,7 @@ export const audioTableConfig = {
           header: 'Error Statistics',
           sortable: false,
           render: (stats) => (
-            <div className="flex flex-col space-y-1">
-              <div className="text-xs text-gray-600">Substitutions: {stats.substitutions}</div>
-              <div className="text-xs text-gray-600">Deletions: {stats.deletions}</div>
-              <div className="text-xs text-gray-600">Insertions : {stats.insertions}</div>
-            </div>
+            <ErrorStatsBadges stats={stats} />
           )
         },
         // score
