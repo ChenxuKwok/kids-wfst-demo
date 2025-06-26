@@ -8,6 +8,7 @@ import {
   DialogTitle
 } from '@/components/ui/dialog';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { Slider } from '@/components/ui/slider';
 import { cn } from '@/lib/utils';
 import { marked } from 'marked';
 
@@ -15,7 +16,10 @@ const ExpandableText = ({ text, lines = 2 }) => {
   const [expanded, setExpanded] = useState(false);
   const [clampable, setClampable] = useState(false);
   const [open, setOpen] = useState(false);
+  const [scrollPos, setScrollPos] = useState(0);
+  const [scrollMax, setScrollMax] = useState(0);
   const textRef = useRef(null);
+  const scrollRef = useRef(null);
   useEffect(() => {
     if (!text) return;
     const el = textRef.current;
@@ -24,6 +28,20 @@ const ExpandableText = ({ text, lines = 2 }) => {
       setClampable(el.scrollHeight > el.clientHeight + 1);
     }
   }, [text, lines, expanded]);
+
+  useEffect(() => {
+    if (!open) return;
+    const container = scrollRef.current?.querySelector('[data-slot="scroll-area-viewport"]');
+    if (!container) return;
+    const update = () => {
+      setScrollMax(container.scrollHeight - container.clientHeight);
+      setScrollPos(container.scrollTop);
+    };
+    update();
+    const handleScroll = () => setScrollPos(container.scrollTop);
+    container.addEventListener('scroll', handleScroll);
+    return () => container.removeEventListener('scroll', handleScroll);
+  }, [open, html]);
 
   if (!text) return null;
 
@@ -60,12 +78,25 @@ const ExpandableText = ({ text, lines = 2 }) => {
               <DialogHeader>
                 <DialogTitle>Advice</DialogTitle>
               </DialogHeader>
-              <ScrollArea className="max-h-80">
+              <ScrollArea ref={scrollRef} className="max-h-80">
                 <div
                   className="text-sm text-gray-700 whitespace-pre-wrap"
                   dangerouslySetInnerHTML={{ __html: html }}
                 />
               </ScrollArea>
+              <Slider
+                className="mt-2"
+                min={0}
+                max={scrollMax}
+                value={[scrollPos]}
+                onValueChange={(val) => {
+                  const container = scrollRef.current?.querySelector('[data-slot="scroll-area-viewport"]');
+                  if (container) {
+                    container.scrollTop = val[0];
+                  }
+                  setScrollPos(val[0]);
+                }}
+              />
             </DialogContent>
           </Dialog>
         </div>
