@@ -78,7 +78,7 @@ export const audioTableConfig = {
           error_stats: {
           substitutions: 1,
           deletions: 1,
-          insertions: 2,
+          insertions: 1,
           total_ref_phonemes: NaN,
           verified_per: NaN
           },
@@ -91,8 +91,8 @@ export const audioTableConfig = {
           speaker: "Child B",
           phn_transcription: preprocessedData["sample_2"]?.phn_transcription || "",
           error_stats: {
-            substitutions: 3,
-            deletions: 5,
+            substitutions: 2,
+            deletions: 4,
             insertions: 0,
             total_ref_phonemes: NaN,
             verified_per: NaN
