@@ -3,6 +3,9 @@ import InlineAudioPlayer from '../components/InlineAudioPlayer';
 import ExpandableText from '../components/ExpandableText';
 import preprocessedData from '../assets/preprocessedData.json';
 import sample1Audio from '../assets/audio/sample_1.wav';
+import sample2Audio from '../assets/audio/sample_2.wav';
+import sample3Audio from '../assets/audio/sample_3.wav';
+
 
 // Example configuration showing how to add inline audio to tables
 export const audioTableConfig = {
@@ -47,8 +50,6 @@ export const audioTableConfig = {
               <div className="text-xs text-gray-600">Substitutions: {stats.substitutions}</div>
               <div className="text-xs text-gray-600">Deletions: {stats.deletions}</div>
               <div className="text-xs text-gray-600">Insertions : {stats.insertions}</div>
-              <div className="text-xs text-gray-600">Total reference phonemes: {stats.total_ref_phonemes}</div>
-              <div className="text-xs text-gray-600">Verified PER: {stats.verified_per.toFixed(2)}%</div>
             </div>
           )
         },
@@ -76,15 +77,45 @@ export const audioTableConfig = {
           speaker: "Child A",
           phn_transcription: preprocessedData["sample_1"]?.phn_transcription || "",
           error_stats: {
-          substitutions: 91,
-          deletions: 82,
-          insertions: 12,
-          total_ref_phonemes: 573,
-          verified_per: 32.29
+          substitutions: 1,
+          deletions: 1,
+          insertions: 2,
+          total_ref_phonemes: NaN,
+          verified_per: NaN
           },
-          score: 0.88,
+          score: 2.30,
           llm_advice: preprocessedData["sample_1"]?.llm_advice || "",
           },
+        {
+          audio_file: sample2Audio,
+          sample_id: "sample_2",
+          speaker: "Child B",
+          phn_transcription: preprocessedData["sample_2"]?.phn_transcription || "",
+          error_stats: {
+            substitutions: 3,
+            deletions: 5,
+            insertions: 0,
+            total_ref_phonemes: NaN,
+            verified_per: NaN
+          },
+          score: 2.21,
+          llm_advice: preprocessedData["sample_2"]?.llm_advice || "",
+        },
+        {
+          audio_file: sample3Audio,
+          sample_id: "sample_3",
+          speaker: "Child C",  
+          phn_transcription: preprocessedData["sample_3"]?.phn_transcription || "",
+          error_stats: {
+            substitutions: 5,
+            deletions: 3,
+            insertions: 2,
+            total_ref_phonemes: NaN,
+            verified_per: NaN
+          },
+          score: 0.88,
+          llm_advice: preprocessedData["sample_3"]?.llm_advice || "",
+        },
         ]
     },
   ],
