@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -16,8 +16,7 @@ const ExpandableText = ({ text, lines = 2 }) => {
   const [open, setOpen] = useState(false);
   const [scrollPos, setScrollPos] = useState(0);
   const [scrollMax, setScrollMax] = useState(0);
-  const textRef = useRef(null);
-  const scrollRef = useRef(null);
+  const scrollRef = React.useRef(null);
   const html = useMemo(() => (text ? marked.parse(text) : ''), [text]);
 
   useEffect(() => {
@@ -41,7 +40,6 @@ const ExpandableText = ({ text, lines = 2 }) => {
   return (
     <div className="space-y-1 max-w-xs">
       <div
-        ref={textRef}
         className={cn('text-sm text-gray-700 whitespace-pre-wrap', clamped)}
         dangerouslySetInnerHTML={{ __html: html }}
       />
