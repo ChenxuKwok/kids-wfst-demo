@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useRef, useLayoutEffect } from 'react';
+import React, { useState, useMemo, useRef, useLayoutEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -30,7 +30,19 @@ const ExpandableText = ({ text, lines = 2 }) => {
     if (!text) return;
     const el = textRef.current;
     if (!el) return;
-    setClampable(el.scrollHeight > el.clientHeight + 1);
+
+    // measure full height by cloning without line clamp
+    const clone = el.cloneNode(true);
+    clone.style.position = 'absolute';
+    clone.style.visibility = 'hidden';
+    clone.style.pointerEvents = 'none';
+    clone.classList.remove(`line-clamp-${lines}`);
+    document.body.appendChild(clone);
+    const fullHeight = clone.scrollHeight;
+    document.body.removeChild(clone);
+
+    const clampedHeight = el.scrollHeight;
+    setClampable(fullHeight > clampedHeight + 1);
   }, [html, lines]);
 
   useLayoutEffect(() => {
@@ -43,8 +55,7 @@ const ExpandableText = ({ text, lines = 2 }) => {
       setScrollPos(container.scrollTop);
     };
 
-    const raf = requestAnimationFrame(updateScrollState);
-
+    updateScrollState();
     const resizeObserver = new ResizeObserver(updateScrollState);
     resizeObserver.observe(container);
 
@@ -52,7 +63,6 @@ const ExpandableText = ({ text, lines = 2 }) => {
     container.addEventListener('scroll', handleScroll);
 
     return () => {
-      cancelAnimationFrame(raf);
       resizeObserver.disconnect();
       container.removeEventListener('scroll', handleScroll);
     };
