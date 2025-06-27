@@ -6,21 +6,22 @@ import video from '../assets/videos/Sample Media Clip 11.mp4'
 // Website Configuration - Edit this file to customize your content
 export const siteConfig = {
   // Main title and metadata
-  title: "Kids-WFST",
-  subtitle: "A Phoneme Similarity-Augmented Framework for Child Speech Recognition inLanguage Disorder Assessment",
+  title: "K‑Function",
+  subtitle: "Joint Pronunciation Transcription and Feedback for Evaluating Kids Language Function",
   
   // Abstract section
+  // K‑Function: Joint Pronunciation Transcription and Feedback for Evaluating Kids Language Function
   abstract: {
     title: "Abstract",
-    content: `Child speech recognition remains challenging, primarily due to higher fundamental frequency, greater articulatory variability, and data sparsity, preventing systems from achieving adult-level automatic speech recognition (ASR) accuracy. However, reliable child ASR is crucial for early disorder screening and longitudinal intervention monitoring. Most clinically relevant pronunciation errors occur at the sub-word level, which are often masked by word-level objectives such as Word Error Rate. Furthermore, even advanced frameworks including the previous SOTA, Weighted Finite-State Transducer (WFST), lack robustness for subtle phoneme variations. To address this, we propose Kids-WFST. It leverages a Wav2Vec2.0 based phoneme recognition model and a novel phoneme similarity-based substitution structure. When trained on a child speech corpus (MyST), Kids-WFST achieves superior child phoneme recognition against established baselines and demonstrates strong value in language assessment and dysfluency analysis, proving accurate sub-word ASR is vital for automated clinical tools.`
+    content: `Early evaluation of children’s language is frustrated by the high pitch, long phones, and sparse data that derail automatic speech recognisers. We introduce K-Function, a unified framework that combines accurate sub-word transcription, objective scoring, and actionable feedback. Its core, Kids-WFST, merges a Wav2Vec2 phoneme encoder with a phoneme-similarity Dysfluent-WFST to capture child-specific errors while remaining fully interpretable. Kids-WFST attains 1.39 \% phoneme error on MyST and 8.61 \% on Multitudes—absolute gains of 10.47 and 7.06 points over a beam-search decoder. These high-fidelity transcripts power an LLM that grades verbal skills, milestones, reading, and comprehension, aligning with human proctors and supplying tongue-and-lip visualizations plus targeted advice. The results show that precise phoneme recognition cements a complete diagnostic–feedback loop, paving the way for scalable, clinician-ready language assessment.`
   },
 
   // Research sections with video support
   sections: [
     {
       id: "Video Introduction",
-      title: "kids-WFST Introduction",
-      description: "This section provides an overview of the Kids-WFST framework, highlighting its key features and advantages over traditional methods.",
+      title: "K-Fuction Introduction",
+      description: "This section provides an overview of the K-Fuction framework, highlighting its key features and advantages over traditional methods.",
       videoUrl: "", // Add your video URL here
       videoFile: video, // Or add local video file path here
       // samples: []
@@ -31,13 +32,25 @@ export const siteConfig = {
 
   // Authors and affiliations
   authors: [
-    {
-      name: "Author Name",
-      affiliation: "University Department",
-      email: "example@exp.com"}
-    // Add author information here
-    // { name: "Author Name", affiliation: "University", email: "email@domain.com" }
-  ],
+  { "name": "Shuhe Li*", "affiliation": "Zhejiang University", "email": "lishuhe0325@gmail.com"},
+  { "name": "Chenxu Guo* (* equal contribution)", "affiliation": "Zhejiang University", "email": "louis.kwok.work@gmail.com"},
+  { "name": "Jiachen Lian", "affiliation": "UC Berkeley", "email": "jiachenlian@berkeley.edu"},
+  { "name": "Cheol Jun Cho", "affiliation": "UC Berkeley" },
+  { "name": "Wenshuo Zhao", "affiliation": "Zhejiang University" },
+  { "name": "Xuanru Zhou", "affiliation": "Zhejiang University" },
+  { "name": "Dingkun Zhou", "affiliation": "SCUT" },
+  { "name": "Sam Wang", "affiliation": "UC Berkeley" },
+  { "name": "Grace Wang", "affiliation": "UC Berkeley" },
+  { "name": "Jingze Yang", "affiliation": "Zhejiang University" },
+  { "name": "Jingyi Xu", "affiliation": "Zhejiang University" },
+  { "name": "Ruohan Bao", "affiliation": "Zhejiang University" },
+  { "name": "Elise Brenner", "affiliation": "UCSF" },
+  { "name": "Brandon In", "affiliation": "UCSF" },
+  { "name": "Francesca Pei", "affiliation": "UCSF" },
+  { "name": "Maria Luisa Gorno-Tempini", "affiliation": "UCSF" },
+  { "name": "Gopala Anumanchipalli", "affiliation": "UC Berkeley", "email": "gopala@berkeley.edu"}
+],
+
 
   // Links and resources
   links: {
