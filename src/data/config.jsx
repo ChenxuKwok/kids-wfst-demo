@@ -20,8 +20,8 @@ export const siteConfig = {
   sections: [
     {
       id: "Video Introduction",
-      title: "K-Fuction Introduction",
-      description: "This section provides an overview of the K-Fuction framework, highlighting its key features and advantages over traditional methods.",
+      title: "K-Function Introduction",
+      description: "This section provides an overview of the K-Function framework, highlighting its key features and advantages over traditional methods.",
       videoUrl: "", // Add your video URL here
       videoFile: video, // Or add local video file path here
       // samples: []
