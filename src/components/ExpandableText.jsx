@@ -18,7 +18,11 @@ const ExpandableText = ({ text, lines = 2 }) => {
   const [scrollMax, setScrollMax] = useState(0);
   const textRef = useRef(null);
   const scrollRef = useRef(null);
-  const html = useMemo(() => (text ? marked.parse(text) : ''), [text]);
+  const placeholder = 'No advice available';
+  const html = useMemo(
+    () => (text ? marked.parse(text) : `<p>${placeholder}</p>`),
+    [text]
+  );
 
   useEffect(() => {
     if (!open) return;
@@ -34,7 +38,7 @@ const ExpandableText = ({ text, lines = 2 }) => {
     return () => container.removeEventListener('scroll', handleScroll);
   }, [open, html]);
 
-  if (!text) return null;
+
 
   const clamped = `line-clamp-${lines}`;
 
