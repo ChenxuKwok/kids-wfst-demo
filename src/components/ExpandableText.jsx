@@ -11,6 +11,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Slider } from '@/components/ui/slider';
 import { cn } from '@/lib/utils';
 import { marked } from 'marked';
+import DOMPurify from 'dompurify';
 
 const ExpandableText = ({ text, lines = 2 }) => {
   const [open, setOpen] = useState(false);
@@ -18,7 +19,11 @@ const ExpandableText = ({ text, lines = 2 }) => {
   const [scrollMax, setScrollMax] = useState(0);
   const textRef = useRef(null);
   const scrollRef = useRef(null);
-  const html = useMemo(() => (text ? marked.parse(text) : ''), [text]);
+  const html = useMemo(() => {
+    if (!text) return '';
+    const raw = marked.parse(text);
+    return DOMPurify.sanitize(raw);
+  }, [text]);
 
   useEffect(() => {
     if (!open) return;
