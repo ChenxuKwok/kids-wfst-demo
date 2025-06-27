@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -29,14 +29,24 @@ const ExpandableText = ({ text, lines = 2 }) => {
     if (!open) return;
     const container = scrollRef.current?.querySelector('[data-slot="scroll-area-viewport"]');
     if (!container) return;
-    const update = () => {
+
+    const updateScrollState = () => {
       setScrollMax(container.scrollHeight - container.clientHeight);
       setScrollPos(container.scrollTop);
     };
-    update();
+
+    // Initial update and on resize
+    updateScrollState();
+    const resizeObserver = new ResizeObserver(updateScrollState);
+    resizeObserver.observe(container);
+
     const handleScroll = () => setScrollPos(container.scrollTop);
     container.addEventListener('scroll', handleScroll);
-    return () => container.removeEventListener('scroll', handleScroll);
+
+    return () => {
+      resizeObserver.disconnect();
+      container.removeEventListener('scroll', handleScroll);
+    };
   }, [open, html]);
 
   if (!text) return null;
