@@ -13,23 +13,12 @@ import { cn } from '@/lib/utils';
 import { marked } from 'marked';
 
 const ExpandableText = ({ text, lines = 2 }) => {
-  const [expanded, setExpanded] = useState(false);
   const [open, setOpen] = useState(false);
   const [scrollPos, setScrollPos] = useState(0);
   const [scrollMax, setScrollMax] = useState(0);
-  const [clampable, setClampable] = useState(false);
   const textRef = useRef(null);
   const scrollRef = useRef(null);
   const html = useMemo(() => (text ? marked.parse(text) : ''), [text]);
-
-  useEffect(() => {
-    if (!text) return;
-    const el = textRef.current;
-    if (!el) return;
-    if (!expanded) {
-      setClampable(el.scrollHeight > el.clientHeight + 1);
-    }
-  }, [text, lines, expanded]);
 
   useEffect(() => {
     if (!open) return;
@@ -47,10 +36,7 @@ const ExpandableText = ({ text, lines = 2 }) => {
 
   if (!text) return null;
 
-  const toggle = () => setExpanded((prev) => !prev);
-  const clamped = expanded ? '' : `line-clamp-${lines}`;
-
-  // const html = useMemo(() => (text ? marked.parse(text) : ''), [text]);
+  const clamped = `line-clamp-${lines}`;
 
   return (
     <div className="space-y-1 max-w-xs">
@@ -59,52 +45,40 @@ const ExpandableText = ({ text, lines = 2 }) => {
         className={cn('text-sm text-gray-700 whitespace-pre-wrap', clamped)}
         dangerouslySetInnerHTML={{ __html: html }}
       />
-      {clampable && (
-        <div className="flex gap-2">
-          <Button
-            variant="link"
-            size="sm"
-            className="p-0 h-auto"
-            onClick={toggle}
-          >
-            {expanded ? 'Show Less' : 'Show More'}
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogTrigger asChild>
+          <Button variant="link" size="sm" className="p-0 h-auto">
+            View All
           </Button>
-          <Dialog open={open} onOpenChange={setOpen}>
-            <DialogTrigger asChild>
-              <Button variant="link" size="sm" className="p-0 h-auto">
-                View All
-              </Button>
-            </DialogTrigger>
-            <DialogContent className="max-w-lg">
-              <DialogHeader>
-                <DialogTitle>Advice</DialogTitle>
-              </DialogHeader>
-              <div className="flex items-start gap-2">
-                <ScrollArea ref={scrollRef} className="max-h-80 flex-1">
-                  <div
-                    className="text-sm text-gray-700 whitespace-pre-wrap"
-                    dangerouslySetInnerHTML={{ __html: html }}
-                  />
-                </ScrollArea>
-                <Slider
-                  orientation="vertical"
-                  className="h-80"
-                  min={0}
-                  max={scrollMax}
-                  value={[scrollPos]}
-                  onValueChange={(val) => {
-                    const container = scrollRef.current?.querySelector('[data-slot="scroll-area-viewport"]');
-                    if (container) {
-                      container.scrollTop = val[0];
-                    }
-                    setScrollPos(val[0]);
-                  }}
-                />
-              </div>
-            </DialogContent>
-          </Dialog>
-        </div>
-      )}
+        </DialogTrigger>
+        <DialogContent className="max-w-lg">
+          <DialogHeader>
+            <DialogTitle>Advice</DialogTitle>
+          </DialogHeader>
+          <div className="flex items-start gap-2">
+            <ScrollArea ref={scrollRef} className="max-h-80 flex-1">
+              <div
+                className="text-sm text-gray-700 whitespace-pre-wrap"
+                dangerouslySetInnerHTML={{ __html: html }}
+              />
+            </ScrollArea>
+            <Slider
+              orientation="vertical"
+              className="h-80"
+              min={0}
+              max={scrollMax}
+              value={[scrollPos]}
+              onValueChange={(val) => {
+                const container = scrollRef.current?.querySelector('[data-slot="scroll-area-viewport"]');
+                if (container) {
+                  container.scrollTop = val[0];
+                }
+                setScrollPos(val[0]);
+              }}
+            />
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
