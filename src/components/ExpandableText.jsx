@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -46,7 +46,6 @@ const ExpandableText = ({ text, lines = 2 }) => {
   return (
     <div className="space-y-1 max-w-xs">
       <div
-        ref={textRef}
         className={cn('text-sm text-gray-700 whitespace-pre-wrap', clamped)}
         dangerouslySetInnerHTML={{ __html: html }}
       />
