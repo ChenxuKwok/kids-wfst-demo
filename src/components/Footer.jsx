@@ -77,7 +77,7 @@ const Footer = () => {
             </div>
             
             <p className="text-gray-400 text-sm">
-              © {new Date().getFullYear()} Research Project. Built with React and Tailwind CSS.
+              © {new Date().getFullYear()} K-Function | Berkeley Speech Group | ALL RIGHTS RESERVED
             </p>
           </div>
         </div>
