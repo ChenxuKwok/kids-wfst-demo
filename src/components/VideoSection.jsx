@@ -58,10 +58,6 @@ const VideoSection = ({ section }) => {
                     </div>
                   )}
                 </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold mb-2">{section.title}</h3>
-                  <p className="text-gray-600">{section.description}</p>
-                </div>
               </div>
             )}
 

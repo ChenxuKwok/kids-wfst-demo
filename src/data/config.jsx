@@ -1,7 +1,7 @@
 import React from 'react';
 import InlineAudioPlayer from '../components/InlineAudioPlayer';
 import { audioTableConfig } from './audio-table-config'; // Adjust path if you renamed the file
-import video from '../assets/videos/Sample Media Clip 11.mp4'
+import video from '../assets/videos/K-Function.mov'
 
 // Website Configuration - Edit this file to customize your content
 export const siteConfig = {
@@ -21,7 +21,7 @@ export const siteConfig = {
     {
       id: "Video Introduction",
       title: "K-Function Introduction",
-      description: "This section provides an overview of the K-Function framework, highlighting its key features and advantages over traditional methods.",
+      description: "In this work, we present K-Function, a comprehensive framework for evaluating children’s language function. It consists of our newly proposed Kids-WFST (K-WFST) —a lightweight and interpretable kids phoneme transcription model—an LLM-boosted automatic language function scoring system, and an articulatory feedback component. Together, these modules form a unified diagnostic system for generalized language function evaluation in children.",
       videoUrl: "", // Add your video URL here
       videoFile: video, // Or add local video file path here
       // samples: []
